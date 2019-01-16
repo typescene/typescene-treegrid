@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "es5",
+        "outDir": "../dist",
+        "experimentalDecorators": true,
+        "lib": ["esnext", "dom"]
+    }
+}
