@@ -17,7 +17,8 @@
   "author": "Jelmer Cormont",
   "license": "MIT",
   "devDependencies": {
-    "@typescene/webapp": "^0.11.3",
+    "@typescene/web-nav": "^1.2.0",
+    "@typescene/webapp": "^2.0.1",
     "parcel-bundler": "^1.11.0",
     "typescript": "^3.2.2"
   }

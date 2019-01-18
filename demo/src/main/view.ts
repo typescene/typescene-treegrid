@@ -1,4 +1,5 @@
-import { HMR, TopNavBar } from "@typescene/webapp";
+import { TopNavBar } from "@typescene/web-nav";
+import { HMR } from "@typescene/webapp";
 import { bind, UICoverCell, UIFlowCell, UIFormContextController, UIScrollContainer, UISelectionController } from "typescene";
 import { PropertyGrid, PropertyGridDropdownRow, PropertyGridGroup, PropertyGridRow, PropertyGridTextFieldRow, PropertyGridToggleRow } from "../../../src/PropertyGrid";
 
