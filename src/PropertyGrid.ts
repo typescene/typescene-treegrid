@@ -357,7 +357,10 @@ export class PropertyGridTextFieldRow extends PropertyGridRow {
         if (cell.columnIndex === 1) {
             let grid = this.getParentComponent(TreeGrid);
             if (this.name && grid && grid.formContext) {
-                this.previewText = (grid.formContext as any)[this.name];
+                let value = (grid.formContext as any)[this.name];
+                if (typeof value === "number" && isNaN(value)) value = "";
+                else if (value === undefined) value = "";
+                this.previewText = value;
             }
             this.updateOnFormContextChange = true;
         }
@@ -409,7 +412,10 @@ PropertyGridTextFieldRow.handle({
     },
     Change(e: ManagedEvent) {
         if (e instanceof UIComponentEvent && e.source instanceof UITextField) {
-            this.previewText = e.source.value;
+            let value = e.source.value;
+            if (typeof value === "number" && isNaN(value)) value = "";
+            else if (value === undefined) value = "";
+            this.previewText = value;
         }
     }
 });
@@ -557,7 +563,7 @@ namespace PropertyGridDropdownRow {
     }
 }
 
-/** Represents a two-column property grid with (nested) rows of property labels and inputs */
+/** Represents a two-column property grid with (nested) rows of property labels and inputs; must be wrapped in a `UISelectionController` to trigger deselection of other rows when one of the rows is selected */
 export class PropertyGrid extends TreeGrid<PropertyGridRow> {
     constructor() {
         super();
