@@ -1,4 +1,4 @@
-import { ComponentConstructor, managed, managedChild, ManagedEvent, ManagedList, ManagedRecord, onPropertyEvent, UIBeforeFirstRenderEvent, UICell, UIComponentEventHandler, UIStyle } from "typescene";
+import { ComponentConstructor, managed, managedChild, ManagedEvent, ManagedList, ManagedRecord, onPropertyEvent, UIBeforeRenderEvent, UICell, UIComponentEventHandler, UIStyle } from "typescene";
 import { TreeGrid } from "./TreeGrid";
 
 /** Tree grid cell component, created by the containing row and rendered by the parent tree grid. Each instance has a reference to its containing row. */
@@ -93,7 +93,7 @@ class TreeGridRowObserver {
 
     @onPropertyEvent("_cells")
     handleCellEvents(_list: any, e: ManagedEvent) {
-        if (e instanceof UIBeforeFirstRenderEvent &&
+        if (e instanceof UIBeforeRenderEvent &&
             e.source instanceof TreeGridRowCell) {
             this.row.populateCell(e.source);
         }

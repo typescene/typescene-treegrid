@@ -18,8 +18,8 @@
   "license": "MIT",
   "devDependencies": {
     "@typescene/web-nav": "^1.2.0",
-    "@typescene/webapp": "^2.0.1",
+    "@typescene/webapp": "^2.0.12",
     "parcel-bundler": "^1.11.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.5.2"
   }
 }

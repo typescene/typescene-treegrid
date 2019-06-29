@@ -1,5 +1,6 @@
+import { BrowserApplication } from "@typescene/webapp";
 import { logUnhandledException } from "typescene";
-import { Application } from "./app";
+import { MainActivity } from "./main/activity";
 
 // create a new Application instance, remove old one (on dev server)
 main().catch(logUnhandledException);
@@ -8,7 +9,7 @@ async function main() {
     if (typeof app === "object" && app.destroyAsync) {
         await app.destroyAsync();
     }
-    app = new Application();
+    app = BrowserApplication.run(MainActivity);
     await app.activateAsync();
 
     console.log("Application is now active");
