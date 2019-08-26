@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es5",
+    "jsx": "react",
+    "jsxFactory": "JSX",
+    "outDir": "tmp",
+    "experimentalDecorators": true
+  },
+  "files": ["./app/app.ts"]
+}

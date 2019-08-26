@@ -1,11 +1,14 @@
 {
   "name": "@typescene/treegrid",
-  "version": "1.2.2",
+  "version": "0.0.0",
   "description": "Typescene TreeGrid and PropertyGrid components",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "dist"
+  ],
   "scripts": {
-    "start": "cd demo && parcel ./public/index.html --open",
     "prepublishOnly": "npm run build",
     "build": "tsc -p src",
     "prebuild": "rm -rf dist"
@@ -16,10 +19,12 @@
   },
   "author": "Jelmer Cormont",
   "license": "MIT",
+  "peerDependencies": {
+    "typescene": "2"
+  },
   "devDependencies": {
-    "@typescene/web-nav": "^1.2.0",
-    "@typescene/webapp": "^2.0.12",
-    "parcel-bundler": "^1.11.0",
-    "typescript": "^3.5.2"
+    "@typescene/webapp": "2",
+    "@typescene/web-nav": "2",
+    "typescript": "^3.5.3"
   }
 }
