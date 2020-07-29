@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
     "target": "es5",
     "jsx": "react",
     "jsxFactory": "JSX",

@@ -20,12 +20,10 @@
   },
   "author": "Jelmer Cormont",
   "license": "MIT",
-  "peerDependencies": {
-    "typescene": "2"
-  },
   "devDependencies": {
-    "@typescene/webapp": "2",
-    "@typescene/web-nav": "2",
-    "typescript": "^3.5.3"
+    "typescene": "beta",
+    "@typescene/webapp": "beta",
+    "@typescene/web-nav": "beta",
+    "typescript": "^3.9.7"
   }
 }

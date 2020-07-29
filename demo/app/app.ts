@@ -1,5 +1,5 @@
 import { BrowserApplication } from "@typescene/webapp";
-import { ComponentEvent, managed, ManagedRecord, PageViewActivity } from "typescene";
+import { ComponentEvent, PageViewActivity, UIFormContext } from "typescene";
 import { PropertyGridDropdownRow, PropertyGridRow, TreeGridRow } from "../../dist";
 import view from "./view";
 
@@ -17,7 +17,7 @@ class MainActivity extends PageViewActivity.with(view) {
   path = "";
 
   /** Form context data bound to property grid rows */
-  context = ManagedRecord.create({
+  context = UIFormContext.create({
     text: "Example text",
     number: 123,
     bool: true,

@@ -1,5 +1,5 @@
 import { AppHeader, AppLayout, AppTitle } from "@typescene/web-nav";
-import JSX, { bind } from "typescene/JSX";
+import { JSX, bind } from "typescene";
 import {
   PropertyGrid,
   PropertyGridDropdownRow,
@@ -24,7 +24,7 @@ export default (
     >
       <formcontext formContext={bind("context")}>
         <PropertyGrid
-          rowSeparator={{ type: "line" }}
+          rowSeparator={{ lineThickness: 1 }}
           iconCollapsed={_iconCollapsed}
           iconExpanded={_iconExpanded}
           rows={[

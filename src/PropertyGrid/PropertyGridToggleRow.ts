@@ -1,4 +1,4 @@
-import { CHANGE, ManagedEvent, UIComponentEvent, UIStyle, UIToggle } from "typescene";
+import { UIComponentEvent, UIStyle, UIToggle } from "typescene";
 import { TreeGridRowCell } from "../TreeGrid";
 import { PropertyGridRow } from "./PropertyGridRow";
 
@@ -34,17 +34,21 @@ export class PropertyGridToggleRow extends PropertyGridRow {
     super.populateCell(cell);
   }
 }
-PropertyGridToggleRow.handle({
-  SpacebarPress(e: ManagedEvent) {
-    if (e instanceof UIComponentEvent && e.source instanceof TreeGridRowCell) {
-      this.cellAt(1).content.forEach(c => {
-        if (c instanceof UIToggle) {
-          c.state = !c.state;
-          c.emit(CHANGE);
-        }
-      });
-    }
-  },
+
+PropertyGridToggleRow.presetBindingsFrom(UIToggle);
+
+PropertyGridToggleRow.addEventHandler(function (e) {
+  if (
+    e.name === "SpacebarPress" &&
+    e instanceof UIComponentEvent &&
+    e.source instanceof TreeGridRowCell
+  ) {
+    this.cellAt(1).content.forEach(c => {
+      if (c instanceof UIToggle) {
+        c.state = !c.state;
+      }
+    });
+  }
 });
 
 export namespace PropertyGridToggleRow {

@@ -31,7 +31,7 @@ const _propertyGridLabelStyle = UIStyle.create("PropertyGridLabel", {
 const PropertyGridActionButton = UIButton.with({
   onClick: "+PropertyGridActionButtonClick",
   style: UIStyle.create("PropertyGridAction", {
-    controlStyle: { background: "transparent", borderRadius: 0 },
+    decoration: { background: "transparent", borderRadius: 0 },
     dimensions: { minWidth: 0, height: 32 },
   }),
 });
@@ -252,7 +252,7 @@ export class PropertyGridRow extends TreeGridRow {
         this.row.propagateComponentEvent("Action");
       }
     }
-    onFocusIn(e: ManagedEvent) {
+    onFocusIn() {
       if (!this.row.isSelected()) {
         this.row.cellAt(0).propagateComponentEvent("Select");
       }

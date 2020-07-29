@@ -1,10 +1,13 @@
 {
-    "compilerOptions": {
-        "strict": true,
-        "target": "es5",
-        "outDir": "../dist",
-        "declaration": true,
-        "experimentalDecorators": true,
-        "lib": ["esnext", "dom"]
-    }
+  "compilerOptions": {
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "outDir": "../dist",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "lib": ["esnext", "dom"]
+  }
 }

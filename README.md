@@ -4,7 +4,7 @@ This package contains the `TreeGridView` and `PropertyGridView` components. Thes
 
 ## Installation & Usage
 
-**Note:** This component requires [Typescene](https://github.com/typescene/typescene) v2.21+.
+**Note:** This component requires [Typescene](https://github.com/typescene/typescene) v3+.
 
 To add one of these components to your application, add the NPM package first:
 
@@ -52,7 +52,7 @@ Clone the source repository, and run the following commands:
 
 ## Notes
 
-The code in this repository is relatively complex, and probably not a good first project to look at if you're new to Typescene. There are two primary reasons for this:
+The code in this repository is relatively complex, and probably not a good first project to look at (the source code, that is) if you're new to Typescene. There are two primary reasons for this:
 
 1. The grid is rendered as a set of _columns_, rather than simply as rows. This means that all cells within a column are guaranteed to be of the same width, but it does mean that the implementation for updating cells within one row is more complicated than otherwise.
 2. The implementation takes care of updating only the necessary cells when showing/hiding or updating particular rows. This is done using a linked list of visible cells.
