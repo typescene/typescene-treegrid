@@ -48,7 +48,7 @@ export class TreeGridRow extends ManagedRecord {
     delete presets.rows;
     this.presetBindingsFrom(...rowConstructors);
     let f = super.preset(presets);
-    return function(this: TreeGridRow) {
+    return function (this: TreeGridRow) {
       f.call(this);
       if (rowConstructors) this.rows.replace(rowConstructors.map((C: any) => new C()));
     };
@@ -78,7 +78,7 @@ export class TreeGridRow extends ManagedRecord {
   }
 
   /** Method that can be overridden to handle population of new cells just before they are rendered */
-  populateCell(cell: TreeGridRowCell) {}
+  populateCell(_cell: TreeGridRowCell) {}
 
   /** All rows one level below the current row */
   @managedChild
@@ -97,7 +97,7 @@ export class TreeGridRow extends ManagedRecord {
       constructor(public row: TreeGridRow) {}
 
       // update a branch of the tree when the child rows list changes
-      onRowsChange(e?: ManagedEvent) {
+      onRowsChange() {
         let treeGrid = this.row.getParentComponent(TreeGridView);
         if (treeGrid) treeGrid.updateVisibleRows(this.row);
       }

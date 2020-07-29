@@ -1,4 +1,5 @@
-import JSX, {
+import {
+  JSX,
   ComponentConstructor,
   managed,
   managedChild,
@@ -13,7 +14,7 @@ import JSX, {
   UIRenderable,
   UIStyle,
   ViewComponent,
-} from "typescene/JSX";
+} from "typescene";
 import { TreeGridRow } from "./TreeGridRow";
 
 /** Default style for tree grid columns */
@@ -38,7 +39,7 @@ class TreeGridRowPointer<RowT extends TreeGridRow> extends ManagedObject {
 
 /**
  * Represents a hierarchical view with rows and columns.
- * **Note:** This component is rendered as a set of columns, but is managed as a set of rows (in `.rows`) which must be of type `TreeGridRow`. This type is NOT a UI component.
+ * **Note:** This component is rendered as a set of columns, but is managed as a set of rows (in `.rows`) which must be of type `TreeGridRow`. The row type is NOT a UI component.
  */
 export class TreeGridView<RowT extends TreeGridRow = TreeGridRow> extends ViewComponent {
   static preset(presets: TreeGridView.Presets): Function {
@@ -66,7 +67,7 @@ export class TreeGridView<RowT extends TreeGridRow = TreeGridRow> extends ViewCo
       handlers,
       UICell.with({ style: _treeGridContainerStyle }).with(cellPresets)
     );
-    return function(this: TreeGridView) {
+    return function (this: TreeGridView) {
       if (columnCount !== undefined) this.columnCount = columnCount;
       if (rowHeight !== undefined) this.rowHeight = rowHeight;
       if (rowSeparator !== undefined) this.rowSeparator = rowSeparator;
@@ -195,8 +196,12 @@ export class TreeGridView<RowT extends TreeGridRow = TreeGridRow> extends ViewCo
                 this._columnConstructors.length - 1
               ] as any)()))) ||
         new ColumnBase();
-      col.layout = { distribution: "fill", gravity: "start", clip: true };
-      if (this.rowSeparator) col.separator = this.rowSeparator;
+      col.layout = {
+        distribution: "fill",
+        gravity: "start",
+        clip: true,
+        separator: this.rowSeparator,
+      };
       if (this._columnDimensions[i]) col.dimensions = this._columnDimensions[i];
       columns.unshift(col);
     }
@@ -266,7 +271,7 @@ export class TreeGridView<RowT extends TreeGridRow = TreeGridRow> extends ViewCo
         let colClone = new ManagedList<UIRenderable>().replace(col.content);
         let ownCell = pointer.row!.cellAt(i);
         let oldNextCell = (next && next.row && next.row.cellAt(i)) || undefined;
-        let old = colClone.splice(ownCell, oldNextCell, ownCell, ...cells);
+        colClone.splice(ownCell, oldNextCell, ownCell, ...cells);
         col.content.replace(colClone);
       }
       i++;
@@ -350,4 +355,4 @@ export namespace TreeGridView {
 }
 
 /** Represents a hierarchical view with rows and columns. This component has NO content, use the `rows` property instead. */
-export const TreeGrid = JSX.ify(TreeGridView);
+export const TreeGrid = JSX.tag(TreeGridView);

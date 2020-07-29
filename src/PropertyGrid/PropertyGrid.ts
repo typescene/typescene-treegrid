@@ -1,11 +1,4 @@
-import JSX, {
-  ComponentEvent,
-  managed,
-  ManagedObject,
-  observe,
-  UIForm,
-  UIRenderContext,
-} from "typescene/JSX";
+import { JSX, ComponentEvent, managed, observe, bind, UIFormContext } from "typescene";
 import { TreeGridRowCell, TreeGridView } from "../TreeGrid";
 import { PropertyGridRow } from "./PropertyGridRow";
 
@@ -23,7 +16,7 @@ export class PropertyGridView extends TreeGridView<PropertyGridRow> {
     let iconMargin = presets.iconMargin;
     delete presets.iconMargin;
     let f = super.preset(presets);
-    return function(this: PropertyGridView) {
+    return function (this: PropertyGridView) {
       if (horizontalCellPadding !== undefined)
         this.horizontalCellPadding = horizontalCellPadding;
       if (iconExpanded !== undefined) this.iconExpanded = iconExpanded;
@@ -60,15 +53,9 @@ export class PropertyGridView extends TreeGridView<PropertyGridRow> {
   /** Currently selected row, if any */
   selectedRow?: PropertyGridRow;
 
-  /** Current context of surrounding form, if any (only populated before rendering) */
+  /** Current bound parent form context, if any (bound to `formContext`) */
   @managed
-  formContext?: ManagedObject;
-
-  render(callback: UIRenderContext.RenderCallback) {
-    let form = UIForm.find(this);
-    this.formContext = form && form.formContext;
-    return super.render(callback);
-  }
+  formContext?: UIFormContext;
 
   @observe
   static PropertyGridObserver = class {
@@ -95,6 +82,9 @@ export class PropertyGridView extends TreeGridView<PropertyGridRow> {
   };
 }
 
+// add binding for `formContext` property
+PropertyGridView.presetBinding("formContext", bind("formContext"));
+
 export namespace PropertyGridView {
   export interface Presets extends TreeGridView.Presets {
     /** Horizontal padding for both label and preview rows, defaults to 8 */
@@ -111,4 +101,4 @@ export namespace PropertyGridView {
 }
 
 /** Represents a two-column property grid with (nested) rows of property labels and inputs. This component has NO content; use the `rows` property isntead */
-export const PropertyGrid = JSX.ify(PropertyGridView);
+export const PropertyGrid = JSX.tag(PropertyGridView);

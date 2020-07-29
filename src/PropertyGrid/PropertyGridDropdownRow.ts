@@ -1,6 +1,4 @@
 import {
-  ManagedChangeEvent,
-  ManagedEvent,
   UICell,
   UIComponentEvent,
   UIComponentEventHandler,
@@ -50,7 +48,7 @@ export class PropertyGridDropdownRow extends PropertyGridRow {
       let key = "";
       let grid = this.getParentComponent(PropertyGridView);
       if (row.name && grid && grid.formContext) {
-        key = (grid.formContext as any)[row.name];
+        key = grid.formContext.get(row.name);
         let option = row.options && row.options.filter(opt => opt.key === key)[0];
         if (option) this.previewText = option.text;
       }
@@ -74,8 +72,7 @@ export class PropertyGridDropdownRow extends PropertyGridRow {
               let key = e.key;
               let option = row.options && row.options.filter(opt => opt.key === key)[0];
               if (option) {
-                (grid.formContext as any)[row.name] = key;
-                grid.formContext.emit(ManagedChangeEvent.CHANGE);
+                grid.formContext.set(row.name, key, true);
               } else {
                 row.previewText = e.key;
                 row.populateCell(row.cellAt(1));
@@ -91,20 +88,22 @@ export class PropertyGridDropdownRow extends PropertyGridRow {
     super.populateCell(cell);
   }
 }
-PropertyGridDropdownRow.handle({
-  EnterKeyPress(e: ManagedEvent) {
-    if (e instanceof UIComponentEvent && e.source instanceof TreeGridRowCell) {
-      let field = this.cellAt(1);
-      if (field instanceof UICell) {
-        let controller = field.content
-          .toArray()
-          .filter(c => c instanceof UIModalController)[0] as UIModalController;
-        controller &&
-          controller.content &&
-          controller.content.propagateComponentEvent("ShowModal");
-      }
+PropertyGridDropdownRow.addEventHandler(function (e) {
+  if (
+    e.name === "EnterKeyPress" &&
+    e instanceof UIComponentEvent &&
+    e.source instanceof TreeGridRowCell
+  ) {
+    let field = this.cellAt(1);
+    if (field instanceof UICell) {
+      let controller = field.content
+        .toArray()
+        .filter(c => c instanceof UIModalController)[0] as UIModalController;
+      controller &&
+        controller.content &&
+        controller.content.propagateComponentEvent("ShowModal");
     }
-  },
+  }
 });
 
 export namespace PropertyGridDropdownRow {

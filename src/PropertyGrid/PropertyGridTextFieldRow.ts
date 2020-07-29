@@ -1,5 +1,4 @@
 import {
-  ManagedEvent,
   UIBorderlessTextField,
   UIComponentEvent,
   UISpacer,
@@ -41,7 +40,7 @@ export class PropertyGridTextFieldRow extends PropertyGridRow {
     if (cell.columnIndex === 1) {
       let grid = this.getParentComponent(PropertyGridView);
       if (this.name && grid && grid.formContext) {
-        let value = (grid.formContext as any)[this.name];
+        let value = grid.formContext.get(this.name);
         if (typeof value === "number" && isNaN(value)) value = "";
         else if (value === undefined) value = "";
         this.previewText = value;
@@ -73,35 +72,40 @@ export class PropertyGridTextFieldRow extends PropertyGridRow {
     labelCell.textColor = "";
   }
 }
-PropertyGridTextFieldRow.handle({
-  FocusIn(e: ManagedEvent) {
-    if (e instanceof UIComponentEvent && e.source === this.cellAt(1)) {
-      this.showTextField();
-    }
-  },
-  FocusOut(e: ManagedEvent) {
-    if (e instanceof UIComponentEvent && e.source instanceof UITextField) {
-      this.refresh();
-    }
-  },
-  EnterKeyPress(e: ManagedEvent) {
-    if (e instanceof UIComponentEvent) {
-      if (e.source instanceof TreeGridRowCell) {
+
+PropertyGridTextFieldRow.presetBindingsFrom(UITextField);
+
+PropertyGridTextFieldRow.addEventHandler(function (e) {
+  switch (e.name) {
+    case "FocusIn":
+      if (e instanceof UIComponentEvent && e.source === this.cellAt(1)) {
         this.showTextField();
-      } else if (e.source instanceof UITextField) {
-        this.refresh();
-        this.cellAt(0).requestFocus();
       }
-    }
-  },
-  Change(e: ManagedEvent) {
-    if (e instanceof UIComponentEvent && e.source instanceof UITextField) {
-      let value = e.source.value;
-      if (typeof value === "number" && isNaN(value)) value = "";
-      else if (value === undefined) value = "";
-      this.previewText = value;
-    }
-  },
+      break;
+    case "FocusOut":
+      if (e instanceof UIComponentEvent && e.source instanceof UITextField) {
+        this.refresh();
+      }
+      break;
+    case "EnterKeyPress":
+      if (e instanceof UIComponentEvent) {
+        if (e.source instanceof TreeGridRowCell) {
+          this.showTextField();
+        } else if (e.source instanceof UITextField) {
+          this.refresh();
+          this.cellAt(0).requestFocus();
+        }
+      }
+      break;
+    case "Change":
+      if (e instanceof UIComponentEvent && e.source instanceof UITextField) {
+        let value = e.source.value;
+        if (typeof value === "number" && isNaN(value)) value = "";
+        else if (value === undefined) value = "";
+        this.previewText = value;
+      }
+      break;
+  }
 });
 
 export namespace PropertyGridTextFieldRow {
