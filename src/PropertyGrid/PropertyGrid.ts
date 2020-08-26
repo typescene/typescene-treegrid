@@ -88,15 +88,15 @@ PropertyGridView.presetBinding("formContext", bind("formContext"));
 export namespace PropertyGridView {
   export interface Presets extends TreeGridView.Presets {
     /** Horizontal padding for both label and preview rows, defaults to 8 */
-    horizontalCellPadding: number;
+    horizontalCellPadding?: number;
     /** Icon to be displayed in front of expanded group row labels */
-    iconExpanded: string;
+    iconExpanded?: string;
     /** Icon to be displayed in front of collapsed group row labels */
-    iconCollapsed: string;
+    iconCollapsed?: string;
     /** Collapsed/expanded icon size (dp) */
-    iconSize: number;
+    iconSize?: number;
     /** Collapsed/expanded icon margin (dp) */
-    iconMargin: number;
+    iconMargin?: number;
   }
 }
 

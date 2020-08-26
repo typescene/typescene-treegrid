@@ -43,11 +43,12 @@ PropertyGridToggleRow.addEventHandler(function (e) {
     e instanceof UIComponentEvent &&
     e.source instanceof TreeGridRowCell
   ) {
-    this.cellAt(1).content.forEach(c => {
+    for (let c of this.cellAt(1).content.toArray()) {
       if (c instanceof UIToggle) {
         c.state = !c.state;
+        break;
       }
-    });
+    }
   }
 });
 
