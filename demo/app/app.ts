@@ -1,7 +1,13 @@
 import { BrowserApplication } from "@typescene/webapp";
 import { ComponentEvent, PageViewActivity, UIFormContext } from "typescene";
-import { PropertyGridDropdownRow, PropertyGridRow, TreeGridRow } from "../../dist";
 import view from "./view";
+import {
+  PropertyGridDropdownRow,
+  PropertyGridRow,
+  TreeGridRow,
+} from "@typescene/treegrid/dist-es8";
+// Note: ^^ since TypeScript target is set to ES2017,
+// we need to include ES8-specific output for this module
 
 // Property grid row component that is added dynamically to the property grid
 const DynamicRemovableRow = PropertyGridRow.with({
@@ -14,8 +20,6 @@ const DynamicRemovableRow = PropertyGridRow.with({
 });
 
 class MainActivity extends PageViewActivity.with(view) {
-  path = "";
-
   /** Form context data bound to property grid rows */
   context = UIFormContext.create({
     text: "Example text",

@@ -1,4 +1,4 @@
-import { AppHeader, AppLayout, AppTitle } from "@typescene/web-nav";
+import { AppHeader, AppLayout, AppTitle } from "@typescene/web-nav/dist-es8";
 import { JSX, bind } from "typescene";
 import {
   PropertyGrid,
@@ -7,7 +7,9 @@ import {
   PropertyGridRow,
   PropertyGridTextFieldRow,
   PropertyGridToggleRow,
-} from "../../dist";
+} from "@typescene/treegrid/dist-es8";
+// Note: ^^ since TypeScript target is set to ES2017,
+// we need to include ES8-specific output for this module
 
 const _iconCollapsed = '<svg viewBox="0 0 16 16"><polyline points="1 3 8 8 1 13"/></svg>';
 const _iconExpanded = '<svg viewBox="0 0 16 16"><polyline points="8 3 8 11 0 11"/></svg>';

@@ -4,11 +4,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": true,
-    "target": "es5",
+    "experimentalDecorators": true,
+    "target": "ES2017",
+    "module": "ES2020",
+    "moduleResolution": "node",
     "jsx": "react",
     "jsxFactory": "JSX",
-    "outDir": "tmp",
-    "experimentalDecorators": true
+    "outDir": "dist"
   },
   "files": ["./app/app.ts"]
 }

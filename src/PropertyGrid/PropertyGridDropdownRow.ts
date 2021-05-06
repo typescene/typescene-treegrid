@@ -65,7 +65,7 @@ export class PropertyGridDropdownRow extends PropertyGridRow {
           onBuild() {
             row.menuBuilder = this.builder;
             if (row.options) this.builder.addSelectionGroup(row.options, key);
-            row.propagateComponentEvent("BuildMenu");
+            row.emitAction("BuildMenu");
           },
           onSelectMenuItem(e: UIMenuItemSelectedEvent) {
             if (row.name && grid && grid.formContext) {
@@ -99,9 +99,7 @@ PropertyGridDropdownRow.addEventHandler(function (e) {
       let controller = field.content
         .toArray()
         .filter(c => c instanceof UIModalController)[0] as UIModalController;
-      controller &&
-        controller.content &&
-        controller.content.propagateComponentEvent("ShowModal");
+      controller && controller.content && controller.content.emitAction("ShowModal");
     }
   }
 });
