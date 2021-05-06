@@ -321,7 +321,7 @@ export class TreeGridView<RowT extends TreeGridRow = TreeGridRow> extends ViewCo
       onActive() {
         if (!this._initialized) {
           this._initialized = true;
-          this.treeGrid.propagateComponentEvent("Initialize");
+          this.treeGrid.emitAction("Initialize");
           this.treeGrid.updateVisibleRows();
         }
       }

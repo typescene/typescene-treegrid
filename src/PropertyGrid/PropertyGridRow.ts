@@ -245,16 +245,16 @@ export class PropertyGridRow extends TreeGridRow {
   static PropertyGridRowObserver = class {
     constructor(public readonly row: PropertyGridRow) {}
     onPropertyGridActionButtonClick() {
-      this.row.propagateComponentEvent("Action");
+      this.row.emitAction("Action");
     }
     onDoubleClick() {
       if (this.row.previewActionText || this.row.previewActionIcon) {
-        this.row.propagateComponentEvent("Action");
+        this.row.emitAction("Action");
       }
     }
     onFocusIn() {
       if (!this.row.isSelected()) {
-        this.row.cellAt(0).propagateComponentEvent("Select");
+        this.row.cellAt(0).emitAction("Select");
       }
     }
     onSelect() {

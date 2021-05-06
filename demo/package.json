@@ -3,9 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "parcel index.html --open"
+    "start": "rollup --config rollup.config.js -w"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "@typescene/treegrid": "file:../",
+    "@typescene/webapp": "^3.1.0",
+    "@typescene/web-nav": "^3.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup": "^2.47.0"
   }
 }

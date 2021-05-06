@@ -71,7 +71,7 @@ export class PropertyGridView extends TreeGridView<PropertyGridRow> {
       if (e.source instanceof TreeGridRowCell && e.source.row !== this.grid.selectedRow) {
         let old = this.grid.selectedRow;
         this.grid.selectedRow = e.source.row as any;
-        if (old && old.managedState) old.propagateComponentEvent("Deselect");
+        if (old && old.managedState) old.emitAction("Deselect");
       }
     }
     onDeselect(e: ComponentEvent) {
@@ -100,5 +100,5 @@ export namespace PropertyGridView {
   }
 }
 
-/** Represents a two-column property grid with (nested) rows of property labels and inputs. This component has NO content; use the `rows` property isntead */
+/** Represents a two-column property grid with (nested) rows of property labels and inputs. This component has NO content; use the `rows` property instead */
 export const PropertyGrid = JSX.tag(PropertyGridView);
